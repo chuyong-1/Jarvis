@@ -1,0 +1,22 @@
+venv/
+__pycache__/
+*.pyc
+audit.db
+
+# Model weights and binaries — large, re-downloadable, never committed
+models/
+piper/
+
+# Build output
+build/
+dist/
+*.spec.bak
+
+# Runtime state
+chroma/
+knowledge.json
+conversation.json
+apps.json
+_ui_*.png
+_hud_*.png
+jarvis_check.log

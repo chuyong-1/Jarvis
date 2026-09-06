@@ -1,0 +1,31 @@
+# Stage 1: local LLM inference
+# llama-cpp-python is NOT installed from this file — it needs the CUDA wheel index:
+#   pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu121
+# It also needs the CUDA 12 runtime DLLs, which that wheel does NOT bundle:
+#   pip install nvidia-cuda-runtime-cu12 nvidia-cublas-cu12
+# and venv/Lib/site-packages/_cuda_dll_path.pth to put them on PATH (see README notes).
+# Rebuilding the venv without that .pth breaks llama_cpp with a misleading
+# "Could not find module llama.dll" error.
+huggingface_hub>=0.24
+
+# Stage 2: speech I/O
+faster-whisper>=1.0        # STT (CTranslate2 backend — no torch dependency)
+openwakeword>=0.6          # wake-word detection
+onnxruntime>=1.17          # openWakeWord inference backend on Windows
+sounddevice>=0.4           # mic capture + playback (bundles PortAudio)
+soundfile>=0.12            # wav read/write
+numpy>=1.24
+
+# Piper (TTS) is intentionally NOT a pip dependency — it's a standalone binary
+# + onnx voice, kept out of this env so it never competes with the LLM for VRAM.
+# See scripts/test_tts.py for download instructions.
+
+# Stage 3: file system agent
+chromadb>=1.0              # vector store; its built-in ONNX all-MiniLM-L6-v2
+                           # embedder is used deliberately INSTEAD of
+                           # sentence-transformers, which would pull ~2.5GB of torch
+pypdf>=5.0                 # pdf text extraction
+python-docx>=1.1           # docx (paragraphs + tables)
+openpyxl>=3.1              # xlsx (cached formula values only — see extract.py)
+watchdog>=4.0              # filesystem events for incremental reindexing
+reportlab>=4.0             # test-fixture PDF generation only, not runtime
