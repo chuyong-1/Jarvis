@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,40:062A4A,100:1EA7FF&height=180&section=header&text=Jarvis&fontSize=50&fontColor=FFFFFF&fontAlignY=36&animation=fadeIn&desc=Fully%20offline%20voice%20assistant%20%20%C2%B7%20%20no%20cloud%20APIs&descSize=16&descAlignY=58&descColor=D6EEFF" alt="Jarvis" />
+</p>
+
 # Jarvis — fully local, offline voice assistant
 
 No cloud APIs. No Ollama. The LLM runs in-process via `llama-cpp-python` against a
